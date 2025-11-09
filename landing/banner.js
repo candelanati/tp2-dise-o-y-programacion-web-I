@@ -1,34 +1,43 @@
-// Variables
+// Variables 
 let textura;
+let fondo;
 let rotX = 0;
 let rotY = 0;
-let zoom = 450; // un poquito más de zoom
+let zoom = 450;
 let dragging = false;
 let lastMouseX, lastMouseY;
 
 function preload() {
-  // Cargar la textura del bloque de Minecraft (tierra/pasto)
-  textura = loadImage("imagenes/bloque-madera.png");
+  // Cargar texturas
+  textura = loadImage("imagenes/bloque-piedra.jpg");
+  fondo = loadImage("imagenes/paisaje.png"); // Fondo
 }
 
 function setup() {
-  // Banner más alto (500 px)
   let canvas = createCanvas(windowWidth, 500, WEBGL);
   canvas.parent("banner");
 }
 
 function draw() {
-  background(0); // Fondo negro
-  orbitControl();
+  // Dibujar fondo
+  push();
+  translate(0, 0, -500); // lo empujamos atrás del cubo
+  texture(fondo);
+  plane(windowWidth * 2, height * 2); // cubre todo el fondo
+  pop();
+
+  // Agregar un filtro de desenfoque leve
+  // (esto se hace sobre toda la escena 2D)
+  drawingContext.filter = 'blur(5px)'; // 👈 efecto de blur
 
   // Cámara y zoom
   camera(0, 0, zoom, 0, 0, 0, 0, 1, 0);
 
-  // Luz y materiales
+  // Luz
   ambientLight(150);
   directionalLight(255, 255, 255, 0.5, 1, -1);
 
-  // Rotación automática
+  // Rotación
   rotY += 0.01;
 
   // Arrastre manual
@@ -44,10 +53,13 @@ function draw() {
   rotateX(rotX);
   rotateY(rotY);
 
-  // Dibujar cubo con textura
+  // Cubo con textura
   noStroke();
   texture(textura);
   box(150);
+
+  // Quitar blur después del render 3D
+  drawingContext.filter = 'none';
 }
 
 // Eventos del mouse
