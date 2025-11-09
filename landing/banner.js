@@ -8,7 +8,7 @@ let lastMouseX, lastMouseY;
 
 function preload() {
   // Cargar la textura del bloque de Minecraft (tierra/pasto)
-  textura = loadImage("imagenes/bloque_tierra.jpg");
+  textura = loadImage("imagenes/bloque-madera.png");
 }
 
 function setup() {
