@@ -8,7 +8,7 @@ let grassTopImg;    // Textura de pasto (arriba)
 let dirtSideImg;    // Textura de tierra (lados)
 let dirtBottomImg;  // Textura de tierra (abajo)
 let cubeSize = 150
-let fondoImg; // NUEVA: Variable para la imagen de fondo
+let fondo; // NUEVA: Variable para la imagen de fondo
 
 function preload() {
   // Cargar la textura del bloque de Minecraft (tierra/pasto)
@@ -18,50 +18,61 @@ function preload() {
   dirtSideImg = loadImage("imagenes/bloque-tierra-pasto.png");   
   dirtBottomImg = loadImage("imagenes/bloque-tierra.png");
 
-  fondoImg = loadImage("imagenes/paisaje.png"); 
+  fondo = loadImage("imagenes/paisaje.png"); 
 }
 
+
 function setup() {
-  // Banner más alto (500 px)
-  let canvas = createCanvas(windowWidth, windowHeight * 0.6, WEBGL);
+  let canvas = createCanvas(windowWidth, windowHeight * 0.6, WEBGL); // altura dinámica
   canvas.parent("banner");
 }
+
 
 function draw() {
   background(0); // Fondo negro
   // NOTA: Eliminamos orbitControl() porque ya tienes un control manual implementado.
+// Fondo con blur
+    push();
+    translate(0, 0, -500);
+    texture(fondo);
+    plane(windowWidth * 2, height * 2);
+    pop();
+  // Aplicar blur solo al fondo (no al cubo)
+  drawingContext.filter = "blur(4px)";
 
-  // Aseguramos que todas las texturas se hayan cargado antes de dibujar
-  if (!grassTopImg || !dirtSideImg || !dirtBottomImg) {
-      textAlign(CENTER);
-      textSize(24);
-      fill(255, 0, 0);
-      text("Error: Texturas no cargadas correctamente.", 0, 0);
-      return; 
-  }
-// --- FONDO FIJO (NO AFECTADO POR EL ZOOM DEL CUBO) ---
-  if (fondoImg) {
-      // Aplicar blur al contexto de dibujo
-      drawingContext.filter = "blur(4px)";
+//   // Aseguramos que todas las texturas se hayan cargado antes de dibujar
+//   if (!grassTopImg || !dirtSideImg || !dirtBottomImg) {
+//       textAlign(CENTER);
+//       textSize(24);
+//       fill(255, 0, 0);
+//       text("Error: Texturas no cargadas correctamente.", 0, 0);
+//       return; 
+//   }
+// // // --- FONDO FIJO (NO AFECTADO POR EL ZOOM DEL CUBO) ---
+//   if (fondoImg) {
+//       // Aplicar blur al contexto de dibujo
+//       drawingContext.filter = "blur(4px)";
       
-      push();
-      // ******* CAMBIO CLAVE 1: Dibujar el fondo antes de definir la cámara con zoom *******
-      // Resetear la matriz para que el plano se dibuje en las coordenadas 0,0,0
-      resetMatrix(); 
+//       push();
+//       // ******* CAMBIO CLAVE 1: Dibujar el fondo antes de definir la cámara con zoom *******
+//       // Resetear la matriz para que el plano se dibuje en las coordenadas 0,0,0
+//       resetMatrix(); 
       
-      texture(fondoImg);
-      // CAMBIO CLAVE 2: Dibujamos un plano mucho más grande que el canvas (por ejemplo, 1.5 veces) 
-      // y en el eje Z negativo (lejos) para asegurar que cubre TODO el viewport
-      translate(0, 0, -500); // Lo empujamos hacia atrás para que quede por detrás del cubo
-      plane(width * 1.5, height * 1.5); 
-      pop();
+//       texture(fondoImg);
+//       // CAMBIO CLAVE 2: Dibujamos un plano mucho más grande que el canvas (por ejemplo, 1.5 veces) 
+//       // y en el eje Z negativo (lejos) para asegurar que cubre TODO el viewport
+//       translate(0, 0, -500); // Lo empujamos hacia atrás para que quede por detrás del cubo
+//       plane(width * 1.5, height * 1.5); 
+//       pop();
       
-      // DESACTIVAR EL BLUR antes de dibujar el cubo
-      drawingContext.filter = "none"; 
-  }
-  // --- FIN FONDO FIJO ---
+//       // DESACTIVAR EL BLUR antes de dibujar el cubo
+//       drawingContext.filter = "none"; 
+//   }
+//   // --- FIN FONDO FIJO ---
+  
   
   // ******* CAMBIO CLAVE 3: La cámara con zoom se aplica AHORA, solo para el cubo *******
+  // Cámara y zoom
   camera(0, 0, zoom, 0, 0, 0, 0, 1, 0);
 
 
