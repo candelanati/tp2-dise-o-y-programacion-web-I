@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  font-family: 'VT323', monospace;
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #555555 !important;
+  padding: 10px 30px;
+}
+
+.navbar-brand img {
+  height: 40px;
+}
+
+/* Enlaces */
+.nav-link {
+  color: #FFFFFF !important;
+  font-size: 22px;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #00AA00 !important;
+}
+
+/* Botón Comprar */
+.btn-comprar {
+  background-color: #00AA00; /* Verde base */
+  border: 2px solid #00AA00;
+  color: #000000;
+  font-size: 22px;
+  padding: 5px 20px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-comprar:hover,
+.btn-comprar:active {
+  background-color: #007700; /* Verde más oscuro al pasar */
+  border-color: #007700;
+  color: #FFFFFF;
+}
+
+
+/* Menú hamburguesa */
+.navbar-toggler {
+  border-color: #AAAAAA;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
