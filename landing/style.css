@@ -1,140 +1,129 @@
-:root{
-  --mc-black:#000000;
-  --mc-dark:#111111;
-  --mc-mid:#555555;
-  --mc-green:#00AA00;
-  --mc-green-dark:#007700;
-  --text:#E6E6E6;
-  --white:#ffffff;
-}
-
+/* ====== BASE ====== */
 body{
   margin:0;
   font-family:'VT323', monospace;
-  background-color:var(--mc-black);
-  color:var(--white);
+  background:#000;
+  color:#fff;
 }
 
-/* NAVBAR */
-#top-nav{
-  background-color:var(--mc-mid) !important;
-  padding:10px 30px;
+/* ====== NAVBAR estilo Minecraft ====== */
+.navbar{
+  background:#2f2f2f !important;         /* barra plana oscura */
+  padding:12px 40px;
+  border-bottom:1px solid #232323;        /* línea muy sutil */
+  box-shadow:0 1px 6px rgba(0,0,0,.35);   /* profundidad mínima */
 }
-.navbar-toggler{ border-color:#AAAAAA; }
+
+/* Logo un poco más grande y nítido */
+.navbar-brand img{
+  height:46px;
+  image-rendering:crisp-edges;
+  image-rendering:-webkit-optimize-contrast;
+}
+
+/* Links: tipografía clara, sin glow, subrayado verde fino al hover */
+.nav-link{
+  color:#e6e6e6 !important;
+  font-size:20px;
+  letter-spacing:.04em;
+  padding:.25rem .9rem;
+  position:relative;
+  transition:color .2s ease;
+  text-transform:uppercase;
+}
+
+.nav-link:hover{
+  color:#ffffff !important;
+}
+
+.nav-link::after{
+  content:"";
+  position:absolute;
+  left:.6rem; right:.6rem; bottom:.15rem;
+  height:2px;
+  background:#21bf3a;                    /* verde oficial aprox */
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .18s ease;
+}
+
+.nav-link:hover::after{
+  transform:scaleX(1);
+}
+
+/* ====== Botón COMPRAR — borde verde, sin brillo ====== */
+.btn-comprar{
+  background:transparent;                 /* transparente por defecto */
+  border:2px solid #21bf3a;               /* solo borde */
+  color:#21bf3a;
+  font-size:18px;
+  letter-spacing:.04em;
+  padding:.4rem 1.1rem;
+  border-radius:8px;
+  text-decoration:none;
+  transition:background .18s ease, color .18s ease, transform .06s ease;
+  box-shadow:none;                         /* sin glow */
+  display:inline-flex; align-items:center; gap:.45rem;
+}
+
+/* Flechita como en el sitio */
+.btn-comprar::after{
+  content:"›";
+  font-size:18px;
+  transform:translateX(0);
+  transition:transform .15s ease;
+}
+
+.btn-comprar:hover{
+  background:rgba(33,191,58,.14);         /* se “llena” leve al hover */
+  color:#eaffee;
+}
+
+.btn-comprar:hover::after{
+  transform:translateX(2px);
+}
+
+.btn-comprar:active{
+  transform:translateY(1px);
+}
+
+/* Hamburguesa */
+.navbar-toggler{
+  border-color:#9a9a9a;
+}
 .navbar-toggler-icon{
   background-image:url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
-.nav-link{
-  color:var(--white) !important;
-  font-size:22px;
-  letter-spacing:1px;
-  transition:color .25s;
-}
-.nav-link:hover{ color:var(--mc-green) !important; }
 
-.btn-comprar{
-  background:var(--mc-green);
-  border:2px solid var(--mc-green);
-  color:#000;
-  font-size:22px;
-  padding:6px 20px;
-  transition:all .25s;
-}
-.btn-comprar:hover{
-  background:var(--mc-green-dark);
-  border-color:var(--mc-green-dark);
-  color:#fff;
-}
-
-/* BANNER (canvas p5) */
+/* ====== Banner ====== */
 #banner{
   width:100%;
-  height:60vh;          /* responsive */
+  height:60vh;
   background:#000;
   overflow:hidden;
   margin:0;
-  position:relative;
 }
 
-/* INFO SECTION */
-#minecraft-info{ background:var(--mc-dark); }
-.titulo{
-  color:#55FF55;             /* sin brillo */
-  text-shadow:none;
-  font-size:clamp(28px,3.2vw,42px);
-  margin-bottom:12px;
+/* ====== Sección informativa (puedes mantener la tuya) ====== */
+#minecraft-info{ background:#111; padding:80px 10%; }
+#minecraft-info .container{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:48px;
 }
-.lead-paragraph{
-  color:var(--text);
-  font-size:clamp(16px,1.6vw,22px);
-  line-height:1.55;
-  margin-bottom:22px;
+#minecraft-info .texto{ flex:1 1 420px; max-width:620px; text-align:left; }
+#minecraft-info .texto h2{ font-size:clamp(28px,3vw,44px); color:#55ff55; letter-spacing:1px; margin:0 0 16px; }
+#minecraft-info .texto p{ font-size:clamp(16px,1.6vw,22px); line-height:1.55; color:#e6e6e6; margin:0 0 24px; }
+#minecraft-info .btn-leer-mas{
+  background:#21bf3a; border:2px solid #21bf3a; color:#000;
+  padding:10px 24px; font-size:20px; border-radius:6px;
+  transition:transform .2s ease, background .2s ease, border-color .2s ease;
 }
-.btn-leer-mas{
-  background:var(--mc-green);
-  color:#000;
-  border:2px solid var(--mc-green);
-  border-radius:8px;
-  padding:10px 22px;
-  font-size:20px;
-  transition:all .2s;
-  text-decoration:none;
-}
-.btn-leer-mas:hover{
-  background:var(--mc-green-dark);
-  border-color:var(--mc-green-dark);
-  color:#fff;
-}
+#minecraft-info .btn-leer-mas:hover{ background:#27d147; border-color:#27d147; transform:translateY(-2px); }
+#minecraft-info .imagen{ flex:1 1 420px; text-align:center; }
+#minecraft-info .imagen img{ width:100%; max-width:520px; border-radius:12px; display:block; margin:0 auto; }
 
-/* Separador pixel */
-.mc-hr{
-  border:0;
-  border-top:4px solid var(--mc-green);
-  filter: drop-shadow(0 0 6px rgba(0,170,0,.3));
-  margin:0 auto;
+/* ====== Responsive ====== */
+@media (max-width:992px){
+  .navbar{ padding:10px 20px; }
+  #minecraft-info .container{ flex-direction:column-reverse; }
+  #minecraft-info .texto{ text-align:center; }
 }
-
-/* Cards features */
-#features{ background:#0e0e0e; }
-.mc-card{
-  background:#151515;
-  border:2px solid #2a2a2a;
-  padding:28px 22px;
-  border-radius:12px;
-  transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-}
-.mc-card h3{
-  color:#55FF55;
-  margin:0 0 10px;
-  font-size:clamp(22px,2.4vw,28px);
-}
-.mc-card p{
-  color:#DCDCDC;
-  font-size:clamp(15px,1.4vw,18px);
-  margin:0;
-}
-.mc-card:hover{
-  transform: translateY(-4px);
-  border-color:var(--mc-green);
-  box-shadow:0 0 18px rgba(0,170,0,.15);
-}
-
-/* CTA */
-#cta{
-  background:linear-gradient(180deg,#0c0c0c 0%, #101010 100%);
-}
-#cta h2{
-  color:#EDEDED;
-  font-size:clamp(26px,3vw,38px);
-  margin:0;
-}
-
-/* Footer */
-#site-footer{
-  background:#0b0b0b;
-  border-top:2px solid #202020;
-  color:#BFBFBF;
-  font-size:18px;
-}
-.footer-link{ color:#CCCCCC; text-decoration:none; }
-.footer-link:hover{ color:#FFFFFF; }

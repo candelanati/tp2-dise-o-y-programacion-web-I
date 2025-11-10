@@ -78,15 +78,13 @@ function draw(){
   ambientLight(160);
   directionalLight(255,255,255, 0.6, 0.6, -0.8);
 
-  // --- Rotación ---
-  if (!dragging) {
-    rotY += 0.01; // Rotación automática
-  } else {
-    // Rotación manual
-    let dx = mouseX - lastMouseX;
-    let dy = mouseY - lastMouseY;
-    rotY += dx * 0.01;
-    rotX += dy * 0.01;
+  // --- Rotación: SIEMPRE gira + suma el arrastre si corresponde ---
+  rotY += 0.01; // rotación automática constante
+  if (dragging){
+    const dx = mouseX - lastMouseX;
+    const dy = mouseY - lastMouseY;
+    rotY += dx * 0.01;   // agrega control horizontal
+    rotX += dy * 0.01;   // agrega control vertical
     lastMouseX = mouseX;
     lastMouseY = mouseY;
   }
@@ -121,34 +119,19 @@ function draw(){
   texture(dirtSideImg);
 
   // Frontal
-  push();
-  translate(0, 0, cubeSize/2);
-  plane(cubeSize, cubeSize);
-  pop();
+  push(); translate(0, 0, cubeSize/2); plane(cubeSize, cubeSize); pop();
 
   // Trasera
-  push();
-  translate(0, 0, -cubeSize/2);
-  rotateY(PI);
-  plane(cubeSize, cubeSize);
-  pop();
+  push(); translate(0, 0, -cubeSize/2); rotateY(PI); plane(cubeSize, cubeSize); pop();
 
   // Derecha
-  push();
-  translate(cubeSize/2, 0, 0);
-  rotateY(HALF_PI);
-  plane(cubeSize, cubeSize);
-  pop();
+  push(); translate(cubeSize/2, 0, 0); rotateY(HALF_PI); plane(cubeSize, cubeSize); pop();
 
   // Izquierda
-  push();
-  translate(-cubeSize/2, 0, 0);
-  rotateY(-HALF_PI);
-  plane(cubeSize, cubeSize);
-  pop();
+  push(); translate(-cubeSize/2, 0, 0); rotateY(-HALF_PI); plane(cubeSize, cubeSize); pop();
 }
 
-// --- Función para detectar si el mouse está sobre el cubo ---
+// --- Hover aproximado: radio en el centro, escalado por zoom ---
 function isOverCube(){
   const cx = width / 2;
   const cy = height / 2;
@@ -158,7 +141,7 @@ function isOverCube(){
   return dist(mouseX, mouseY, cx, cy) <= r;
 }
 
-// --- Eventos de interacción ---
+// --- Interacción ---
 function mousePressed(){
   if (isOverCube()){
     dragging = true;
@@ -167,9 +150,7 @@ function mousePressed(){
   }
 }
 
-function mouseReleased(){
-  dragging = false;
-}
+function mouseReleased(){ dragging = false; }
 
 function mouseWheel(e){
   if (isOverCube()){
