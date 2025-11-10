@@ -1,90 +1,88 @@
-// Variables
-let rotX = 0;
-let rotY = 0;
-let zoom = 450; // un poquito más de zoom
-let dragging = false;
-let lastMouseX, lastMouseY;
-let grassTopImg;    // Textura de pasto (arriba)
-let dirtSideImg;    // Textura de tierra (lados)
-let dirtBottomImg;  // Textura de tierra (abajo)
-let cubeSize = 150
-let fondo; // NUEVA: Variable para la imagen de fondo
+// ====== VOID + CUBO DE TIERRA (p5.js) ======
+let rotX = 0, rotY = 0, zoom = 450;
+let dragging = false, lastMouseX, lastMouseY;
+let cubeSize = 150;
+let hover = false; // ¿el mouse está sobre el cubo?
 
-function preload() {
-  // Cargar la textura del bloque de Minecraft (tierra/pasto)
-  // textura = loadImage("imagenes/bloque-madera.png");
-  // textura = loadImage("imagenes/bloque-pasto.png")
-  grassTopImg = loadImage("imagenes/bloque-pasto.png");     
-  dirtSideImg = loadImage("imagenes/bloque-tierra-pasto.png");   
+// Texturas
+let grassTopImg, dirtSideImg, dirtBottomImg;
+
+// Partículas del "void"
+let stars = [];
+const STAR_COUNT = 220;
+const STAR_Z_NEAR = -400;
+const STAR_Z_FAR  = -1400;
+
+function preload(){
+  grassTopImg   = loadImage("imagenes/bloque-pasto.png");
+  dirtSideImg   = loadImage("imagenes/bloque-tierra-pasto.png");
   dirtBottomImg = loadImage("imagenes/bloque-tierra.png");
-
-  fondo = loadImage("imagenes/paisaje.png"); 
 }
 
-
-function setup() {
-  let canvas = createCanvas(windowWidth, windowHeight * 0.6, WEBGL); // altura dinámica
+function setup(){
+  const canvas = createCanvas(windowWidth, windowHeight * 0.6, WEBGL);
   canvas.parent("banner");
+
+  // Generar partículas del fondo
+  for (let i = 0; i < STAR_COUNT; i++){
+    stars.push({
+      x: random(-width, width),
+      y: random(-height, height),
+      z: random(STAR_Z_FAR, STAR_Z_NEAR),
+      s: random(2, 5),
+      spd: random(0.2, 0.6)
+    });
+  }
 }
 
+function draw(){
+  background(0);
 
-function draw() {
-  background(0); // Fondo negro
-  // NOTA: Eliminamos orbitControl() porque ya tienes un control manual implementado.
-// Fondo con blur
+  // --- Fondo "void" ---
+  push();
+  const parX = map(mouseX, 0, width, -20, 20);
+  const parY = map(mouseY, 0, height, -10, 10);
+
+  noStroke();
+  ambientLight(40);
+  for (let i = 0; i < stars.length; i++){
+    let st = stars[i];
+
     push();
-    translate(0, 0, -500);
-    texture(fondo);
-    plane(windowWidth * 2, height * 2);
+    translate(st.x + parX, st.y + parY, st.z);
+    fill(255,255,255, 40);
+    box(st.s * 2);
     pop();
-  // Aplicar blur solo al fondo (no al cubo)
-  drawingContext.filter = "blur(4px)";
 
-//   // Aseguramos que todas las texturas se hayan cargado antes de dibujar
-//   if (!grassTopImg || !dirtSideImg || !dirtBottomImg) {
-//       textAlign(CENTER);
-//       textSize(24);
-//       fill(255, 0, 0);
-//       text("Error: Texturas no cargadas correctamente.", 0, 0);
-//       return; 
-//   }
-// // // --- FONDO FIJO (NO AFECTADO POR EL ZOOM DEL CUBO) ---
-//   if (fondoImg) {
-//       // Aplicar blur al contexto de dibujo
-//       drawingContext.filter = "blur(4px)";
-      
-//       push();
-//       // ******* CAMBIO CLAVE 1: Dibujar el fondo antes de definir la cámara con zoom *******
-//       // Resetear la matriz para que el plano se dibuje en las coordenadas 0,0,0
-//       resetMatrix(); 
-      
-//       texture(fondoImg);
-//       // CAMBIO CLAVE 2: Dibujamos un plano mucho más grande que el canvas (por ejemplo, 1.5 veces) 
-//       // y en el eje Z negativo (lejos) para asegurar que cubre TODO el viewport
-//       translate(0, 0, -500); // Lo empujamos hacia atrás para que quede por detrás del cubo
-//       plane(width * 1.5, height * 1.5); 
-//       pop();
-      
-//       // DESACTIVAR EL BLUR antes de dibujar el cubo
-//       drawingContext.filter = "none"; 
-//   }
-//   // --- FIN FONDO FIJO ---
-  
-  
-  // ******* CAMBIO CLAVE 3: La cámara con zoom se aplica AHORA, solo para el cubo *******
-  // Cámara y zoom
+    push();
+    translate(st.x + parX, st.y + parY, st.z);
+    fill(255);
+    box(st.s);
+    pop();
+
+    st.z += st.spd;
+    if (st.z > STAR_Z_NEAR){
+      st.z = STAR_Z_FAR;
+      st.x = random(-width, width);
+      st.y = random(-height, height);
+      st.s = random(2,5);
+      st.spd = random(0.2,0.6);
+    }
+  }
+  pop();
+
+  // --- Cámara ---
   camera(0, 0, zoom, 0, 0, 0, 0, 1, 0);
 
+  // Luces del cubo
+  ambientLight(160);
+  directionalLight(255,255,255, 0.6, 0.6, -0.8);
 
-  // Luz y materiales
-  ambientLight(150);
-  directionalLight(255, 255, 255, 0.5, 1, -1);
-
-  // Rotación automática
-  rotY += 0.01;
-
-  // Arrastre manual (código de rotación personalizada)
-  if (dragging) {
+  // --- Rotación ---
+  if (!dragging) {
+    rotY += 0.01; // Rotación automática
+  } else {
+    // Rotación manual
     let dx = mouseX - lastMouseX;
     let dy = mouseY - lastMouseY;
     rotY += dx * 0.01;
@@ -93,77 +91,92 @@ function draw() {
     lastMouseY = mouseY;
   }
 
-  // Aplicar rotaciones
+  // Detección de hover
+  hover = isOverCube();
+  cursor(hover ? (dragging ? 'grabbing' : 'grab') : 'default');
+
   rotateX(rotX);
   rotateY(rotY);
 
-  // ******* 3. REEMPLAZO DEL BOX(150) por 6 PLANOS *******
-  // Dibujamos el cubo usando 6 planos individuales, asignando la textura correcta a cada cara.
+  // --- CUBO ---
   noStroke();
 
-  // Las caras tienen la textura de tierra lateral por defecto
-  texture(dirtSideImg); 
-
-  // --- CARA SUPERIOR (PASTO) ---
+  // Superior (pasto)
   push();
-  translate(0, -cubeSize / 2, 0); // Mover hacia arriba la mitad del tamaño
-  rotateX(HALF_PI);              // Rotar 90 grados para que el plano mire hacia arriba
-  texture(grassTopImg);          // Aplicar la textura de pasto
+  translate(0, -cubeSize/2, 0);
+  rotateX(HALF_PI);
+  texture(grassTopImg);
   plane(cubeSize, cubeSize);
   pop();
 
-  // --- CARA INFERIOR (TIERRA) ---
+  // Inferior (tierra)
   push();
-  translate(0, cubeSize / 2, 0); // Mover hacia abajo la mitad del tamaño
-  rotateX(-HALF_PI);             // Rotar 90 grados para que el plano mire hacia abajo
-  texture(dirtBottomImg);        // Aplicar la textura de tierra inferior
-  plane(cubeSize, cubeSize);
-  pop();
-  
-  // --- CARA FRONTAL (TIERRA) ---
-  push();
-  translate(0, 0, cubeSize / 2); // Mover hacia adelante
-  plane(cubeSize, cubeSize);     // Ya tiene aplicada la textura dirtSideImg por defecto
-  pop();
-
-  // --- CARA TRASERA (TIERRA) ---
-  push();
-  translate(0, 0, -cubeSize / 2); // Mover hacia atrás
-  rotateY(PI);                    // Rotar 180 grados para que mire hacia atrás
+  translate(0, cubeSize/2, 0);
+  rotateX(-HALF_PI);
+  texture(dirtBottomImg);
   plane(cubeSize, cubeSize);
   pop();
 
-  // --- CARA DERECHA (TIERRA) ---
+  // Laterales
+  texture(dirtSideImg);
+
+  // Frontal
   push();
-  translate(cubeSize / 2, 0, 0); // Mover hacia la derecha
-  rotateY(HALF_PI);              // Rotar 90 grados para que mire a la derecha
+  translate(0, 0, cubeSize/2);
   plane(cubeSize, cubeSize);
   pop();
 
-  // --- CARA IZQUIERDA (TIERRA) ---
+  // Trasera
   push();
-  translate(-cubeSize / 2, 0, 0); // Mover hacia la izquierda
-  rotateY(-HALF_PI);             // Rotar 90 grados para que mire a la izquierda
+  translate(0, 0, -cubeSize/2);
+  rotateY(PI);
+  plane(cubeSize, cubeSize);
+  pop();
+
+  // Derecha
+  push();
+  translate(cubeSize/2, 0, 0);
+  rotateY(HALF_PI);
+  plane(cubeSize, cubeSize);
+  pop();
+
+  // Izquierda
+  push();
+  translate(-cubeSize/2, 0, 0);
+  rotateY(-HALF_PI);
   plane(cubeSize, cubeSize);
   pop();
 }
 
-// Eventos del mouse
-function mousePressed() {
-  dragging = true;
-  lastMouseX = mouseX;
-  lastMouseY = mouseY;
+// --- Función para detectar si el mouse está sobre el cubo ---
+function isOverCube(){
+  const cx = width / 2;
+  const cy = height / 2;
+  const baseR = Math.min(width, height) * 0.12;
+  const scale = 450 / zoom;
+  const r = baseR * constrain(scale, 0.5, 2.0);
+  return dist(mouseX, mouseY, cx, cy) <= r;
 }
 
-function mouseReleased() {
+// --- Eventos de interacción ---
+function mousePressed(){
+  if (isOverCube()){
+    dragging = true;
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
+  }
+}
+
+function mouseReleased(){
   dragging = false;
 }
 
-function mouseWheel(event) {
-  zoom += event.delta * 0.5;
-  zoom = constrain(zoom, 200, 1000);
+function mouseWheel(e){
+  if (isOverCube()){
+    zoom = constrain(zoom + e.delta * 0.5, 200, 1000);
+  }
 }
-// NUEVA: Maneja la responsividad del canvas
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight * 0.6); 
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight * 0.6);
 }

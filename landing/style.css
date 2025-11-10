@@ -1,52 +1,140 @@
-body {
-  margin: 0;
-  font-family: 'VT323', monospace;
-  background-color: #000000;
-  color: #FFFFFF;
+:root{
+  --mc-black:#000000;
+  --mc-dark:#111111;
+  --mc-mid:#555555;
+  --mc-green:#00AA00;
+  --mc-green-dark:#007700;
+  --text:#E6E6E6;
+  --white:#ffffff;
 }
 
-/* Navbar */
-.navbar {
-  background-color: #555555 !important;
-  padding: 10px 30px;
+body{
+  margin:0;
+  font-family:'VT323', monospace;
+  background-color:var(--mc-black);
+  color:var(--white);
 }
 
-.navbar-brand img {
-  height: 40px;
+/* NAVBAR */
+#top-nav{
+  background-color:var(--mc-mid) !important;
+  padding:10px 30px;
+}
+.navbar-toggler{ border-color:#AAAAAA; }
+.navbar-toggler-icon{
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+.nav-link{
+  color:var(--white) !important;
+  font-size:22px;
+  letter-spacing:1px;
+  transition:color .25s;
+}
+.nav-link:hover{ color:var(--mc-green) !important; }
+
+.btn-comprar{
+  background:var(--mc-green);
+  border:2px solid var(--mc-green);
+  color:#000;
+  font-size:22px;
+  padding:6px 20px;
+  transition:all .25s;
+}
+.btn-comprar:hover{
+  background:var(--mc-green-dark);
+  border-color:var(--mc-green-dark);
+  color:#fff;
 }
 
-/* Enlaces */
-.nav-link {
-  color: #FFFFFF !important;
-  font-size: 22px;
-  letter-spacing: 1px;
-  transition: color 0.3s ease;
+/* BANNER (canvas p5) */
+#banner{
+  width:100%;
+  height:60vh;          /* responsive */
+  background:#000;
+  overflow:hidden;
+  margin:0;
+  position:relative;
 }
 
-.nav-link:hover {
-  color: #00AA00 !important;
+/* INFO SECTION */
+#minecraft-info{ background:var(--mc-dark); }
+.titulo{
+  color:#55FF55;             /* sin brillo */
+  text-shadow:none;
+  font-size:clamp(28px,3.2vw,42px);
+  margin-bottom:12px;
+}
+.lead-paragraph{
+  color:var(--text);
+  font-size:clamp(16px,1.6vw,22px);
+  line-height:1.55;
+  margin-bottom:22px;
+}
+.btn-leer-mas{
+  background:var(--mc-green);
+  color:#000;
+  border:2px solid var(--mc-green);
+  border-radius:8px;
+  padding:10px 22px;
+  font-size:20px;
+  transition:all .2s;
+  text-decoration:none;
+}
+.btn-leer-mas:hover{
+  background:var(--mc-green-dark);
+  border-color:var(--mc-green-dark);
+  color:#fff;
 }
 
-/* Botón Comprar */
-.btn-comprar {
-  border: 2px solid #00AA00;
-  color: #00AA00;
-  font-size: 22px;
-  padding: 5px 20px;
-  transition: all 0.3s ease;
-  text-decoration: none;
+/* Separador pixel */
+.mc-hr{
+  border:0;
+  border-top:4px solid var(--mc-green);
+  filter: drop-shadow(0 0 6px rgba(0,170,0,.3));
+  margin:0 auto;
 }
 
-.btn-comprar:hover {
-  background-color: #00AA00;
-  color: #000000;
+/* Cards features */
+#features{ background:#0e0e0e; }
+.mc-card{
+  background:#151515;
+  border:2px solid #2a2a2a;
+  padding:28px 22px;
+  border-radius:12px;
+  transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.mc-card h3{
+  color:#55FF55;
+  margin:0 0 10px;
+  font-size:clamp(22px,2.4vw,28px);
+}
+.mc-card p{
+  color:#DCDCDC;
+  font-size:clamp(15px,1.4vw,18px);
+  margin:0;
+}
+.mc-card:hover{
+  transform: translateY(-4px);
+  border-color:var(--mc-green);
+  box-shadow:0 0 18px rgba(0,170,0,.15);
 }
 
-/* Menú hamburguesa */
-.navbar-toggler {
-  border-color: #AAAAAA;
+/* CTA */
+#cta{
+  background:linear-gradient(180deg,#0c0c0c 0%, #101010 100%);
+}
+#cta h2{
+  color:#EDEDED;
+  font-size:clamp(26px,3vw,38px);
+  margin:0;
 }
 
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+/* Footer */
+#site-footer{
+  background:#0b0b0b;
+  border-top:2px solid #202020;
+  color:#BFBFBF;
+  font-size:18px;
 }
+.footer-link{ color:#CCCCCC; text-decoration:none; }
+.footer-link:hover{ color:#FFFFFF; }
