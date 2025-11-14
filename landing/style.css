@@ -1,4 +1,4 @@
-/* ====== BASE ====== */
+/* ====== BASE ====== */ 
 body{
   margin:0;
   font-family:'VT323', monospace;
@@ -8,20 +8,18 @@ body{
 
 /* ====== NAVBAR estilo Minecraft ====== */
 .navbar{
-  background:#2f2f2f !important;         /* barra plana oscura */
+  background:#2f2f2f !important;
   padding:12px 40px;
-  border-bottom:1px solid #232323;        /* línea muy sutil */
-  box-shadow:0 1px 6px rgba(0,0,0,.35);   /* profundidad mínima */
+  border-bottom:1px solid #232323;
+  box-shadow:0 1px 6px rgba(0,0,0,.35);
 }
 
-/* Logo un poco más grande y nítido */
 .navbar-brand img{
   height:46px;
   image-rendering:crisp-edges;
-  image-rendering:-webkit-optimize-contrast;
 }
 
-/* Links: tipografía clara, sin glow, subrayado verde fino al hover */
+/* Links navbar — verde */
 .nav-link{
   color:#e6e6e6 !important;
   font-size:20px;
@@ -41,7 +39,7 @@ body{
   position:absolute;
   left:.6rem; right:.6rem; bottom:.15rem;
   height:2px;
-  background:#21bf3a;                    /* verde oficial aprox */
+  background:#21bf3a;
   transform:scaleX(0);
   transform-origin:left;
   transition:transform .18s ease;
@@ -51,48 +49,15 @@ body{
   transform:scaleX(1);
 }
 
-/* ====== Botón COMPRAR — borde verde, sin brillo ====== */
+/* Botón COMPRAR (verde) */
 .btn-comprar{
-  background:transparent;                 /* transparente por defecto */
-  border:2px solid #21bf3a;               /* solo borde */
+  background:transparent;
+  border:2px solid #21bf3a;
   color:#21bf3a;
   font-size:18px;
-  letter-spacing:.04em;
   padding:.4rem 1.1rem;
   border-radius:8px;
-  text-decoration:none;
-  transition:background .18s ease, color .18s ease, transform .06s ease;
-  box-shadow:none;                         /* sin glow */
-  display:inline-flex; align-items:center; gap:.45rem;
-}
-
-/* Flechita como en el sitio */
-.btn-comprar::after{
-  content:"›";
-  font-size:18px;
-  transform:translateX(0);
-  transition:transform .15s ease;
-}
-
-.btn-comprar:hover{
-  background:rgba(33,191,58,.14);         /* se “llena” leve al hover */
-  color:#eaffee;
-}
-
-.btn-comprar:hover::after{
-  transform:translateX(2px);
-}
-
-.btn-comprar:active{
-  transform:translateY(1px);
-}
-
-/* Hamburguesa */
-.navbar-toggler{
-  border-color:#9a9a9a;
-}
-.navbar-toggler-icon{
-  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  transition:background .18s ease, color .18s ease;
 }
 
 /* ====== Banner ====== */
@@ -101,29 +66,121 @@ body{
   height:60vh;
   background:#000;
   overflow:hidden;
-  margin:0;
+  position:relative;        /* 👈 IMPORTANTE */
 }
 
-/* ====== Sección informativa (puedes mantener la tuya) ====== */
-#minecraft-info{ background:#111; padding:80px 10%; }
-#minecraft-info .container{
-  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:48px;
+#banner canvas {
+  display:block !important;
+  position:relative !important; /* 👈 evita superposición */
 }
-#minecraft-info .texto{ flex:1 1 420px; max-width:620px; text-align:left; }
-#minecraft-info .texto h2{ font-size:clamp(28px,3vw,44px); color:#55ff55; letter-spacing:1px; margin:0 0 16px; }
-#minecraft-info .texto p{ font-size:clamp(16px,1.6vw,22px); line-height:1.55; color:#e6e6e6; margin:0 0 24px; }
-#minecraft-info .btn-leer-mas{
-  background:#21bf3a; border:2px solid #21bf3a; color:#000;
-  padding:10px 24px; font-size:20px; border-radius:6px;
-  transition:transform .2s ease, background .2s ease, border-color .2s ease;
+
+/* ====== GALERÍA ====== */
+#galeria {
+  background: #111;
+  padding: 70px 0;
+  margin-top: 40px; /* separación del banner */
 }
-#minecraft-info .btn-leer-mas:hover{ background:#27d147; border-color:#27d147; transform:translateY(-2px); }
-#minecraft-info .imagen{ flex:1 1 420px; text-align:center; }
-#minecraft-info .imagen img{ width:100%; max-width:520px; border-radius:12px; display:block; margin:0 auto; }
+
+.titulo-galeria {
+  color: #55ff55;
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.galeria-item {
+  overflow: hidden;
+  border-radius: 10px;
+  position: relative;
+}
+
+.galeria-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform .3s ease, filter .3s ease;
+  border-radius: 10px;
+}
+
+.galeria-item:hover img {
+  transform: scale(1.07);
+  filter: brightness(1.15);
+}
+
+/* ====== Sección informativa ====== */
+#minecraft-info {
+  background: #1a1a1a; 
+  padding: 80px 10%;
+}
+
+#minecraft-info .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+#minecraft-info .texto {
+  flex: 1 1 420px;
+  max-width: 620px;
+  text-align: left;
+}
+
+#minecraft-info .texto h2 {
+  font-size: clamp(28px, 3vw, 44px);
+  color: #55ff55;
+  margin-bottom:16px;
+}
+
+#minecraft-info .texto p {
+  font-size: clamp(16px, 1.6vw, 22px);
+  line-height:1.55;
+  color:#e6e6e6;
+  margin-bottom:24px;
+}
+
+#minecraft-info .texto span {
+  color: #c754ff;    /* violeta */
+}
+
+#minecraft-info .btn-leer-mas {
+  background: #21bf3a;
+  border: 2px solid #21bf3a;
+  color:#000;
+  padding:10px 24px;
+  font-size:20px;
+  border-radius:6px;
+  transition: transform .2s ease, background .2s ease;
+}
+
+#minecraft-info .btn-leer-mas:hover {
+  background:#27d147;
+  transform: translateY(-2px);
+}
+
+#minecraft-info .imagen {
+  flex:1 1 420px;
+  text-align:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#1a1a1a !important;
+  border-radius:20px;
+  padding:40px 0;
+}
+
+#enderman-canvas canvas {
+  border-radius:12px;
+}
 
 /* ====== Responsive ====== */
-@media (max-width:992px){
-  .navbar{ padding:10px 20px; }
-  #minecraft-info .container{ flex-direction:column-reverse; }
-  #minecraft-info .texto{ text-align:center; }
+@media (max-width: 992px) {
+  #minecraft-info .container {
+    flex-direction:column-reverse;
+  }
+
+  #minecraft-info .texto {
+    text-align:center;
+  }
 }
