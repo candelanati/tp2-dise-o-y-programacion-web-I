@@ -16,7 +16,8 @@
 </head>
 
 <body>
-  <!-- Navbar -->
+
+  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
@@ -40,79 +41,112 @@
     </div>
   </nav>
 
-  
-  <!-- Banner con p5.js -->
+  <!-- BANNER p5.js -->
   <section id="banner"></section>
- 
 
-<section id="galeria">
+  <!-- GALERÍA -->
+  <section id="galeria">
+    <div class="container">
+      <h2 class="titulo-galeria">Galería Destacada</h2>
+
+      <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="galeria-item">
+            <img src="imagenes/c-1.jpg" alt="Imagen 1">
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="galeria-item">
+            <img src="imagenes/c-2.jpg" alt="Imagen 2">
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="galeria-item">
+            <img src="imagenes/c-3.jpg" alt="Imagen 3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN INFORMATIVA -->
+  <section id="minecraft-info">
+
+    <div class="container info-flex">
+
+      <div class="texto">
+        <h2>Los Enderman y el Misterio del End</h2>
+
+        <p>
+          Los Enderman son una de las criaturas más enigmáticas de Minecraft.
+          Altos, delgados y silenciosos, habitan en las dimensiones más oscuras,
+          donde la gravedad y la realidad parecen comportarse de forma extraña.
+          Aunque pueden verse pacíficos, basta una simple mirada directa para
+          desatar su furia.
+        </p>
+
+        <p>
+          Se teletransportan, cargan bloques y parecen proteger algo que
+          <span>va más allá de lo que los jugadores conocemos</span>.
+          Cada aparición deja rastros de partículas violetas que flotan
+          como si fueran restos de energía dimensional.
+        </p>
+
+        <a href="#" class="btn-leer-mas">Descubrir más</a>
+      </div>
+
+      <div class="enderman-wrapper">
+        <div id="enderman-canvas"></div>
+      </div>
+
+    </div>
+  </section>
+
+<!-- SECCIÓN: NUESTRO EQUIPO -->
+<section id="equipo">
   <div class="container">
-    <h2 class="titulo-galeria">Galería Destacada</h2>
+    <h2 class="titulo-equipo">Nuestro Equipo</h2>
 
-    <div class="row g-4">
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="galeria-item">
-          <img src="imagenes/c-1.jpg" alt="Imagen 1">
+    <div class="row g-4 justify-content-center">
+
+      <!-- CANDE -->
+      <div class="col-12 col-md-6">
+        <div class="card-equipo">
+          <img src="imagenes/zombie.jpg" alt="Candela Lanati" class="foto-integrante">
+          <h3>Candela Lanati</h3>
+          <p>
+  Estudiante de Diseño Multimedial.<br>
+  Com: DMTA3V – 3er cuatrimestre – Diseño y Programación Web I.
+</p>
+
         </div>
       </div>
 
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="galeria-item">
-          <img src="imagenes/c-2.jpg" alt="Imagen 2">
+      <!-- FLOR -->
+      <div class="col-12 col-md-6">
+        <div class="card-equipo">
+          <img src="imagenes/creeper.jpg" alt="Florencia Gaitan" class="foto-integrante">
+          <h3>Florencia Gaitan</h3>
+          <p>
+  Estudiante de Diseño Multimedial.<br>
+  Com: DMTA3V – 3er cuatrimestre – Diseño y Programación Web I.
+</p>
+
         </div>
       </div>
 
-      <div class="col-12 col-sm-6 col-lg-4">
-        <div class="galeria-item">
-          <img src="imagenes/c-3.jpg" alt="Imagen 3">
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
-  <!-- Sección informativa -->
-  <section id="minecraft-info">
-    <div class="container d-flex flex-wrap align-items-center justify-content-center">
-      <div class="texto">
-  <h2>Los Enderman y el Misterio del End</h2>
-
-  <p>
-    Los Enderman son una de las criaturas más enigmáticas de Minecraft. 
-    Altos, delgados y silenciosos, habitan en las dimensiones más oscuras, 
-    donde la gravedad y la realidad parecen comportarse de forma extraña. 
-    Aunque pueden verse pacíficos, basta una simple mirada directa para 
-    desatar su furia.
-  </p>
-
-  <p>
-  Se teletransportan, cargan bloques y parecen proteger algo que 
-  <span>va más allá de lo que los jugadores conocemos</span>. 
-  Cada aparición deja rastros de partículas violetas que flotan 
-  como si fueran restos de energía dimensional.
-</p>
-
-  <a href="#" class="btn-leer-mas">Descubrir más</a>
-</div>
-
-
-
-
-      <!-- Canvas Enderman -->
-      <div class="imagen">
-        <div id="enderman-canvas"></div>
-      </div>
-    </div>
-  </section>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 
-  <!-- Banner 3D -->
   <script src="banner.js"></script>
-
-  <!-- Enderman 2D (instance mode) -->
   <script src="enderman.js"></script>
 
 </body>

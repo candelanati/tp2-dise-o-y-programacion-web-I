@@ -1,84 +1,77 @@
-/* ====== BASE ====== */ 
-body{
-  margin:0;
-  font-family:'VT323', monospace;
-  background:#000;
-  color:#fff;
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  font-family: 'VT323', monospace;
+  background: #000;
+  color: #fff;
 }
 
-/* ====== NAVBAR estilo Minecraft ====== */
-.navbar{
-  background:#2f2f2f !important;
-  padding:12px 40px;
-  border-bottom:1px solid #232323;
-  box-shadow:0 1px 6px rgba(0,0,0,.35);
+/* ===== NAVBAR ===== */
+.navbar {
+  background: #2f2f2f !important;
+  padding: 12px 40px;
+  border-bottom: 1px solid #232323;
 }
 
-.navbar-brand img{
-  height:46px;
-  image-rendering:crisp-edges;
+.navbar-brand img {
+  height: 46px;
+  image-rendering: crisp-edges;
 }
 
-/* Links navbar — verde */
-.nav-link{
-  color:#e6e6e6 !important;
-  font-size:20px;
-  letter-spacing:.04em;
-  padding:.25rem .9rem;
-  position:relative;
-  transition:color .2s ease;
-  text-transform:uppercase;
+.nav-link {
+  color: #e6e6e6 !important;
+  font-size: 20px;
+  letter-spacing: .04em;
+  padding: .25rem .9rem;
+  position: relative;
+  text-transform: uppercase;
 }
 
-.nav-link:hover{
-  color:#ffffff !important;
+.nav-link:hover {
+  color: #fff !important;
 }
 
-.nav-link::after{
-  content:"";
-  position:absolute;
-  left:.6rem; right:.6rem; bottom:.15rem;
-  height:2px;
-  background:#21bf3a;
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .18s ease;
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: .6rem; right: .6rem; bottom: .15rem;
+  height: 2px;
+  background: #21bf3a;
+  transform: scaleX(0);
+  transition: transform .18s ease;
 }
 
-.nav-link:hover::after{
-  transform:scaleX(1);
+.nav-link:hover::after {
+  transform: scaleX(1);
 }
 
-/* Botón COMPRAR (verde) */
-.btn-comprar{
-  background:transparent;
-  border:2px solid #21bf3a;
-  color:#21bf3a;
-  font-size:18px;
-  padding:.4rem 1.1rem;
-  border-radius:8px;
-  transition:background .18s ease, color .18s ease;
+.btn-comprar {
+  background: transparent;
+  border: 2px solid #21bf3a;
+  color: #21bf3a;
+  padding: .4rem 1.1rem;
+  border-radius: 8px;
 }
 
-/* ====== Banner ====== */
-#banner{
-  width:100%;
-  height:60vh;
-  background:#000;
-  overflow:hidden;
-  position:relative;        /* 👈 IMPORTANTE */
+/* ===== BANNER ===== */
+#banner {
+  width: 100%;
+  height: 60vh;
+  background: #000;
+  overflow: hidden;
+  position: relative;
 }
 
 #banner canvas {
-  display:block !important;
-  position:relative !important; /* 👈 evita superposición */
+  position: relative !important;
+  display: block !important;
 }
 
-/* ====== GALERÍA ====== */
+/* ===== GALERÍA ===== */
 #galeria {
   background: #111;
   padding: 70px 0;
-  margin-top: 40px; /* separación del banner */
+  margin-top: 40px;
 }
 
 .titulo-galeria {
@@ -91,96 +84,160 @@ body{
 .galeria-item {
   overflow: hidden;
   border-radius: 10px;
-  position: relative;
 }
 
 .galeria-item img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  transition: transform .3s ease, filter .3s ease;
-  border-radius: 10px;
+  transition: .3s;
 }
 
-.galeria-item:hover img {
-  transform: scale(1.07);
-  filter: brightness(1.15);
-}
-
-/* ====== Sección informativa ====== */
+/* ===== SECCIÓN INFO ===== */
 #minecraft-info {
-  background: #1a1a1a; 
+  background: #1a1a1a;
   padding: 80px 10%;
 }
 
-#minecraft-info .container {
+.info-flex {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 48px;
+  gap: 40px;
 }
 
-#minecraft-info .texto {
-  flex: 1 1 420px;
-  max-width: 620px;
-  text-align: left;
+.texto {
+  flex: 1 1 50%;
+  max-width: 600px;
 }
 
-#minecraft-info .texto h2 {
+.texto h2 {
   font-size: clamp(28px, 3vw, 44px);
   color: #55ff55;
-  margin-bottom:16px;
+  margin-bottom: 20px;
 }
 
-#minecraft-info .texto p {
-  font-size: clamp(16px, 1.6vw, 22px);
-  line-height:1.55;
-  color:#e6e6e6;
-  margin-bottom:24px;
+.texto p {
+  font-size: clamp(16px, 1.5vw, 22px);
+  line-height: 1.55;
+  color: #e6e6e6;
+  margin-bottom: 22px;
 }
 
-#minecraft-info .texto span {
-  color: #c754ff;    /* violeta */
+.texto span {
+  color: #c754ff;
 }
 
-#minecraft-info .btn-leer-mas {
+.btn-leer-mas {
   background: #21bf3a;
   border: 2px solid #21bf3a;
-  color:#000;
-  padding:10px 24px;
-  font-size:20px;
-  border-radius:6px;
-  transition: transform .2s ease, background .2s ease;
+  color: black;
+  padding: 10px 24px;
+  font-size: 20px;
+  border-radius: 6px;
 }
 
-#minecraft-info .btn-leer-mas:hover {
-  background:#27d147;
-  transform: translateY(-2px);
+.enderman-wrapper {
+  flex: 1 1 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-#minecraft-info .imagen {
-  flex:1 1 420px;
-  text-align:center;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#1a1a1a !important;
-  border-radius:20px;
-  padding:40px 0;
+.enderman-wrapper canvas {
+  max-width: 420px;
+  pointer-events: none;
+}
+
+/* ====== SECCIÓN EQUIPO ====== */
+#equipo {
+  background: #111;
+  padding: 80px 0;
+  margin-top: 60px;
+}
+
+.titulo-equipo {
+  text-align: center;
+  color: #55ff55;
+  font-size: 42px;
+  margin-bottom: 50px;
+}
+
+.card-equipo {
+  background: #1a1a1a;
+  border: 2px solid #55ff55;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  transition: .2s ease;
+}
+
+.card-equipo:hover {
+  transform: translateY(-5px);
+}
+
+.foto-integrante {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  image-rendering: pixelated; /* efecto Minecraft */
+}
+
+.card-equipo h3 {
+  color: #55ff55;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.card-equipo p {
+  color: #dcdcdc;
+  font-size: 18px;
+  line-height: 1.4;
 }
 
 #enderman-canvas canvas {
-  border-radius:12px;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  line-height: 0 !important;
+
+  background: #1a1a1a !important; /* asegura que no haya gaps visibles */
 }
 
-/* ====== Responsive ====== */
-@media (max-width: 992px) {
-  #minecraft-info .container {
-    flex-direction:column-reverse;
-  }
+/* Fix universal para p5 en flexbox */
+canvas {
+  display: block;
+  line-height: 0;
+}
 
-  #minecraft-info .texto {
-    text-align:center;
+/* Fix anti-gaps entre secciones */
+section {
+  display: block;
+}
+
+#banner,
+#galeria,
+#minecraft-info,
+#equipo {
+  margin-top: 0 !important;
+  padding-top: 120;
+  border: none !important;
+  
+}
+
+#banner canvas {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .info-flex {
+    flex-direction: column-reverse;
+    text-align: center;
   }
 }
