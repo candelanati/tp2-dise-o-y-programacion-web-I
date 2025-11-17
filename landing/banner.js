@@ -1,13 +1,12 @@
-// ====== VOID + CUBO DE TIERRA (p5.js) ======
 let rotX = 0, rotY = 0, zoom = 450;
 let dragging = false, lastMouseX, lastMouseY;
 let cubeSize = 150;
-let hover = false; // ¿el mouse está sobre el cubo?
+let hover = false; 
 
-// Texturas
+
 let grassTopImg, dirtSideImg, dirtBottomImg;
 
-// Partículas del "void"
+
 let stars = [];
 const STAR_COUNT = 220;
 const STAR_Z_NEAR = -400;
@@ -23,7 +22,7 @@ function setup(){
   const canvas = createCanvas(windowWidth, windowHeight * 0.6, WEBGL);
   canvas.parent("banner");
 
-  // Generar partículas del fondo
+ 
   for (let i = 0; i < STAR_COUNT; i++){
     stars.push({
       x: random(-width, width),
@@ -38,7 +37,7 @@ function setup(){
 function draw(){
   background(0);
 
-  // --- Fondo "void" ---
+
   push();
   const parX = map(mouseX, 0, width, -20, 20);
   const parY = map(mouseY, 0, height, -10, 10);
@@ -71,35 +70,34 @@ function draw(){
   }
   pop();
 
-  // --- Cámara ---
+
   camera(0, 0, zoom, 0, 0, 0, 0, 1, 0);
 
-  // Luces del cubo
+
   ambientLight(160);
   directionalLight(255,255,255, 0.6, 0.6, -0.8);
 
-  // --- Rotación: SIEMPRE gira + suma el arrastre si corresponde ---
-  rotY += 0.01; // rotación automática constante
+  rotY += 0.01; 
   if (dragging){
     const dx = mouseX - lastMouseX;
     const dy = mouseY - lastMouseY;
-    rotY += dx * 0.01;   // agrega control horizontal
-    rotX += dy * 0.01;   // agrega control vertical
+    rotY += dx * 0.01;   
+    rotX += dy * 0.01;   
     lastMouseX = mouseX;
     lastMouseY = mouseY;
   }
 
-  // Detección de hover
+ 
   hover = isOverCube();
   cursor(hover ? (dragging ? 'grabbing' : 'grab') : 'default');
 
   rotateX(rotX);
   rotateY(rotY);
 
-  // --- CUBO ---
+
   noStroke();
 
-  // Superior (pasto)
+ 
   push();
   translate(0, -cubeSize/2, 0);
   rotateX(HALF_PI);
@@ -107,7 +105,7 @@ function draw(){
   plane(cubeSize, cubeSize);
   pop();
 
-  // Inferior (tierra)
+  
   push();
   translate(0, cubeSize/2, 0);
   rotateX(-HALF_PI);
@@ -115,23 +113,23 @@ function draw(){
   plane(cubeSize, cubeSize);
   pop();
 
-  // Laterales
+
   texture(dirtSideImg);
 
-  // Frontal
+ 
   push(); translate(0, 0, cubeSize/2); plane(cubeSize, cubeSize); pop();
 
-  // Trasera
+
   push(); translate(0, 0, -cubeSize/2); rotateY(PI); plane(cubeSize, cubeSize); pop();
 
-  // Derecha
+ 
   push(); translate(cubeSize/2, 0, 0); rotateY(HALF_PI); plane(cubeSize, cubeSize); pop();
 
-  // Izquierda
+  
   push(); translate(-cubeSize/2, 0, 0); rotateY(-HALF_PI); plane(cubeSize, cubeSize); pop();
 }
 
-// --- Hover aproximado: radio en el centro, escalado por zoom ---
+
 function isOverCube(){
   const cx = width / 2;
   const cy = height / 2;
@@ -141,7 +139,7 @@ function isOverCube(){
   return dist(mouseX, mouseY, cx, cy) <= r;
 }
 
-// --- Interacción ---
+
 function mousePressed(){
   if (isOverCube()){
     dragging = true;

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.fuente-secundaria{
+  font-family: "Poppins", sans-serif;
+}
+
 /* ===== BASE ===== */ 
 body {
   margin: 0;
@@ -11,6 +17,9 @@ body {
   background: #2f2f2f !important;
   padding: 12px 40px;
   border-bottom: 1px solid #232323;
+}
+.navbar-collapse{
+  padding-right: 100px;
 }
 
 .navbar-brand img {
@@ -51,6 +60,12 @@ body {
   color: #21bf3a;
   padding: .4rem 1.1rem;
   border-radius: 8px;
+  text-decoration: none;
+}
+.btn-comprar:hover{
+  color: #000;
+  background-color: #21bf3a;
+  transition: all 0.2s;
 }
 
 /* ===== BANNER ===== */
@@ -69,6 +84,7 @@ body {
 
 /* ===== GALERÍA ===== */
 #galeria {
+  margin-top: 0px !important;
   background: #111;
   padding: 70px 0;
   margin-top: 40px;
@@ -84,6 +100,13 @@ body {
 .galeria-item {
   overflow: hidden;
   border-radius: 10px;
+}
+.galeria-item:hover{
+  transition: all 0.s;
+  filter: drop-shadow(0px 0px 5px rgba(0, 128, 0, 0.788));
+}
+.galeria-item:hover img{
+  transform: scale(1.04);
 }
 
 .galeria-item img {
@@ -135,6 +158,13 @@ body {
   padding: 10px 24px;
   font-size: 20px;
   border-radius: 6px;
+  text-decoration: none;
+}
+.btn-leer-mas:hover{
+  background-color: #222;
+  color: #21bf3a;
+  filter: drop-shadow(0px 0px 5px rgba(0, 128, 0, 0.788));
+  transition: all 0.2s;
 }
 
 .enderman-wrapper {
@@ -218,11 +248,10 @@ section {
 }
 
 #banner,
-#galeria,
 #minecraft-info,
 #equipo {
   margin-top: 0 !important;
-  padding-top: 0;
+  /* padding-top: 0; */
   border: none !important;
 }
 
@@ -254,6 +283,10 @@ section {
   border-radius: 12px;
   transition: 0.25s ease;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .info-card:hover {
@@ -337,17 +370,22 @@ section {
 }
 
 /* Redes */
-.footer-social i {
+i {
   font-size: 28px;
   color: #55ff55;
-  margin-right: 15px;
+  
   cursor: pointer;
   transition: .2s;
+  display: inline-block;
 }
 
 .footer-social i:hover {
-  transform: scale(1.15);
-  color: #7aff7a;
+  transform: translateY(-3px) scale(1.05);
+
+}
+.footer-social{
+  display: flex;
+  gap: 20px;
 }
 
 /* Línea inferior */
