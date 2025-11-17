@@ -1,4 +1,4 @@
-/* ===== BASE ===== */
+/* ===== BASE ===== */ 
 body {
   margin: 0;
   font-family: 'VT323', monospace;
@@ -182,7 +182,7 @@ body {
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 20px;
-  image-rendering: pixelated; /* efecto Minecraft */
+  image-rendering: pixelated;
 }
 
 .card-equipo h3 {
@@ -203,8 +203,7 @@ body {
   padding: 0 !important;
   border: none !important;
   line-height: 0 !important;
-
-  background: #1a1a1a !important; /* asegura que no haya gaps visibles */
+  background: #1a1a1a !important;
 }
 
 /* Fix universal para p5 en flexbox */
@@ -223,9 +222,8 @@ section {
 #minecraft-info,
 #equipo {
   margin-top: 0 !important;
-  padding-top: 120;
+  padding-top: 0;
   border: none !important;
-  
 }
 
 #banner canvas {
@@ -233,6 +231,135 @@ section {
   margin: 0 !important;
   padding: 0 !important;
 }
+
+/* ===== SECCIÓN PASTILLAS con ICONOS BOOTSTRAP ===== */
+#caracteristicas {
+  background: #111;
+  padding: 80px 0;
+  margin-top: 0 !important;
+  text-align: center;
+}
+
+.titulo-caracteristicas {
+  color: #55ff55;
+  font-size: 42px;
+  margin-bottom: 50px;
+}
+
+/* Tarjetas */
+.info-card {
+  background: #1a1a1a;
+  border: 2px solid #55ff55;
+  padding: 35px 20px;
+  border-radius: 12px;
+  transition: 0.25s ease;
+  text-align: center;
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+}
+
+/* ÍCONOS BOOTSTRAP */
+.info-icon {
+  font-size: 55px;
+  color: #55ff55;
+  display: block;
+  margin-bottom: 18px;
+}
+
+/* Títulos */
+.info-card h3 {
+  font-size: 26px;
+  color: #55ff55;
+  margin-bottom: 12px;
+}
+
+/* Texto */
+.info-card p {
+  font-size: 18px;
+  color: #dcdcdc;
+  line-height: 1.4;
+}
+
+/* ===================== FOOTER PROFESIONAL MINECRAFT ===================== */
+
+#footer-mc {
+  background: #0c0c0c;
+  padding: 80px 0 40px;
+  border-top: 2px solid #21bf3a;
+  font-family: 'VT323', monospace;
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1400px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 50px;
+}
+
+/* Logo / título */
+.footer-logo {
+  font-size: 32px;
+  color: #55ff55;
+  margin-bottom: 15px;
+}
+
+/* Descripción */
+.footer-desc {
+  font-size: 18px;
+  color: #dcdcdc;
+  line-height: 1.4;
+}
+
+/* Títulos de columna */
+#footer-mc h4 {
+  font-size: 24px;
+  color: #55ff55;
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+
+/* Texto */
+#footer-mc p, 
+#footer-mc a {
+  font-size: 18px;
+  color: #eaeaea;
+  text-decoration: none;
+  display: block;
+  margin: 6px 0;
+}
+
+#footer-mc a:hover {
+  color: #55ff55;
+}
+
+/* Redes */
+.footer-social i {
+  font-size: 28px;
+  color: #55ff55;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.footer-social i:hover {
+  transform: scale(1.15);
+  color: #7aff7a;
+}
+
+/* Línea inferior */
+.footer-bottom {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #222;
+  color: #55ff55;
+  font-size: 20px;
+}
+
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
