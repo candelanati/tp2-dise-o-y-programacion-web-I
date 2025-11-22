@@ -9,3 +9,5 @@ Turno: tarde.
 Apellidos y nombres: Gaitan, Florencia; Lanati, Candela.
 Docente: Toyos Omar.
 Caracter de entrega: Segundo parcial.
+
+Netlify: gaitan-lanati.netlify.app
