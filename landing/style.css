@@ -221,7 +221,7 @@ body {
 }
 
 .enderman-wrapper canvas {
-  max-width: 3px;
+  max-width: 350px;
   pointer-events: none;
 }
 
